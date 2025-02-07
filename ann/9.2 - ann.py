@@ -62,22 +62,23 @@ from keras.layers import Dense
 
 classifier = Sequential()
 
-classifier.add(Dense(6, init = 'uniform', activation = 'relu' , input_dim = 11))
+# init yerine kernel_initializer kullan
+classifier.add(Dense(6, kernel_initializer='uniform', activation='relu', input_dim=11))
 
-classifier.add(Dense(6, init = 'uniform', activation = 'relu'))
+classifier.add(Dense(6, kernel_initializer='uniform', activation='relu'))
 
-classifier.add(Dense(1, init = 'uniform', activation = 'sigmoid'))
+classifier.add(Dense(1, kernel_initializer='uniform', activation='sigmoid'))
 
-classifier.compile(optimizer = 'adam', loss =  'binary_crossentropy' , metrics = ['accuracy'] )
+classifier.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 classifier.fit(X_train, y_train, epochs=50)
 
 y_pred = classifier.predict(X_test)
 
-y_pred = (y_pred > 0.5)
+y_pred = (y_pred > 0.5)#boolean hale getirir
 
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(y_test,y_pred)
+cm = confusion_matrix(y_test, y_pred)
 
 print(cm)
 
